@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+  # before_action :set_task, only: [:show, :edit, :update, :destroy] # call the set_task before starting any action
+
   def index
     @tasks = Task.all
   end
@@ -28,9 +30,20 @@ class TasksController < ApplicationController
     redirect_to task_path(@task) # path method generate the url based on the alias
   end
 
+  def destroy
+    @task = Task.find(params[:id]) # no need! As I have a before_action
+    @task.destroy # Active Record
+    redirect_to tasks_path, status: :see_other # as we don't redirect to the instance we were handling
+  end
+
 private
 
 def task_params
-  params.required(:task).permit(:title, :details)
+  params.required(:task).permit(:title, :details, :completed)
 end
+
+# def set_task
+#   @task= Task.find(params[:id])
+# end
+
 end
