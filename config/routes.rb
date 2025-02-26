@@ -13,5 +13,5 @@ Rails.application.routes.draw do
   get 'tasks/:id', to: 'tasks#show', as: :task
   post "tasks", to: "tasks#create"
   get "tasks/:id/edit", to: "tasks#edit"
-  patch "tasks/:id/update", to: "tasks#update" # patch is to update an existing record
+  patch "tasks/:id", to: "tasks#update"# patch is to update an existing record
 end

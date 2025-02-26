@@ -25,8 +25,12 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     @task.update(task_params) # updates with the new info
-    redirect_to task_path(@restaurant.id) # path method generate the url based on the alias
+    redirect_to task_path(@task) # path method generate the url based on the alias
   end
 
+private
 
+def task_params
+  params.required(:task).permit(:title, :details)
+end
 end
